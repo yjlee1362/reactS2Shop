@@ -1,0 +1,28 @@
+
+
+$메인칼라 : ff0000;
+
+
+.red{
+    color : $메인칼라;
+};
+
+.my-alret {
+    background-color: #eeeeee;
+    padding:20px;
+    border-radius: 5px;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+}
+
+.my-alret2 {
+    @extend .my-alret;
+    background-color: #ffe591;
+}
+
+
+
+.my-alret p{
+    margin-bottom: 0;
+}
