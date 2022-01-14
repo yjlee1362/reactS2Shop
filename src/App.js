@@ -4,13 +4,14 @@ import './App.css';
 import { useState } from 'react';
 import dett from './data.js';
 import Detail from './Detail.js';
+import axios from 'axios';
 
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
 function App() {
 
   let [shoes, shoes변경] = useState(dett);
-  
+  let [재고,재고변경] = useState([10,11,12]);
 
   function 낮은가격순정렬() {
     const copyArray = [...shoes];
@@ -40,8 +41,8 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link as ={Link}to="/">Home</Nav.Link>
-              <Nav.Link as ={Link}to="/detail">Detail</Nav.Link>
+              <Nav.Link as={Link} to="/">Home</Nav.Link>
+              <Nav.Link as={Link} to="/detail">Detail</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -71,13 +72,26 @@ function App() {
             <div className='row'>
               {shoes.map((a, i) => { return (<상품 key={i} shoes={shoes[i]} />) })}
             </div>
-            <Button variant="dark" onClick={낮은가격순정렬}>낮은 가격순 </Button>{' '}
-            <Button variant="dark" onClick={높은가격순정렬}>높은 가격순</Button>{' '}
-            <Button variant="dark" onClick={기본정렬}>기본정렬</Button>{' '}
+            <div className='sortButtons'>
+              <Button variant="dark" onClick={낮은가격순정렬}>낮은 가격순 </Button>{' '}
+              <Button variant="dark" onClick={높은가격순정렬}>높은 가격순</Button>{' '}
+              <Button variant="dark" onClick={기본정렬}>기본정렬</Button>{' '}
+            </div>
+            <div>
+              <button className='btn btn' onClick={() => {
+                axios.get('https://codingapple1.github.io/shop/data2.json')
+                  .then((result) => {
+                    shoes변경([...shoes, ...result.data])
+                  })
+                  .catch(() => {
+                    console.log('miss')
+                  })
+              }}>더보기</button>
+            </div>
           </div>
         </Route>
         <Route path="/detail/:id">
-          <Detail shoes={shoes}  />
+          <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
         </Route>
         {/* <Route path="/어떤경로" component={컴포넌트이름}></Route> */}
         <Route path="/:id">
@@ -88,14 +102,15 @@ function App() {
 
   );
 }
-function 상품(props) {const a = useHistory()
+function 상품(props) {
+  const a = useHistory()
   return (
     <div className="col-md-4" >
-      <img src={props.shoes.src}  width="100%" />
+      <img src={props.shoes.src} width="100%" />
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.content}</p>
       <p>{props.shoes.price}</p>
-      <Button variant="primary"  onClick={()=>{ a.push(`/detail/${props.shoes.id}`)}} >자세히보기</Button>{' '}
+      <Button variant="primary" onClick={() => { a.push(`/detail/${props.shoes.id}`) }} >자세히보기</Button>{' '}
     </div>
 
   );

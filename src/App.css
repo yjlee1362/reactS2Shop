@@ -45,3 +45,6 @@
   background-image: url('./background.jpg');
   background-size: cover;
 }
+
+.sortButtons
+{margin-top: 30px;}

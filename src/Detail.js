@@ -45,11 +45,19 @@ function Detail(props) {
           <h4 className="pt-5">{clikedId.title}</h4>
           <p>{clikedId.content}</p>
           <p>{clikedId.price}</p>
-          <button className="btn btn-danger">주문하기</button>
+          <Info 재고={props.재고} />
+          <button className="btn btn-danger"
+          onClick={()=>{props.재고변경([9,11,12])}}>주문하기</button>
           <button className="btn btn-danger" onClick={() => { history.goBack(); }}>이전페이지</button>
         </div>
       </div>
     </div>
+  )
+}
+
+function Info(props){
+  return(
+    <p>재고 : {props.재고[0]}</p>
   )
 }
 
