@@ -1,12 +1,16 @@
 import logo from './logo.svg';
 import { Button, Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import './App.css';
-import { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import dett from './data.js';
 import Detail from './Detail.js';
 import axios from 'axios';
 
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
+
+let 재고context = React.createContext();
+
+
 
 function App() {
 
@@ -69,10 +73,15 @@ function App() {
               <Button variant="dark" onClick={기본정렬}>기본정렬</Button>{' '}
             </div>
           <div className='container'>
+
+            <재고context.Provider value={재고}>
+            
             <div className='row'>
               {shoes.map((a, i) => { return (<상품 key={i} shoes={shoes[i]} />) })}
             </div>
             
+            </재고context.Provider>
+
             <div>
             <Button variant="primary" className='more' onClick={() => {
                 axios.get('https://codingapple1.github.io/shop/data2.json')
@@ -88,7 +97,9 @@ function App() {
           </div>
         </Route>
         <Route path="/detail/:id">
+        
           <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
+          
         </Route>
         {/* <Route path="/어떤경로" component={컴포넌트이름}></Route> */}
         <Route path="/:id">
@@ -101,12 +112,15 @@ function App() {
 }
 function 상품(props) {
   const a = useHistory()
+  let 재고 = useContext(재고context);
+
   return (
     <div className="col-md-4" >
       <img src={`https://codingapple1.github.io/shop/shoes${props.shoes.id+1}.jpg`} width="100%" />
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.content}</p>
       <p>{props.shoes.price}</p>
+      {재고}
       <Button variant="primary" onClick={() => { a.push(`/detail/${props.shoes.id}`) }} >자세히보기</Button>{' '}
     </div>
 

@@ -3,6 +3,16 @@
 $메인칼라 : ff0000;
 
 
+.wow{
+    opacity: 0;
+}
+
+.wow-entet.active{
+    opacity: 1;
+    transition: all 500ms;
+
+}
+
 .red{
     color : $메인칼라;
 };
