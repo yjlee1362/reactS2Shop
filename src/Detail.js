@@ -103,8 +103,6 @@ function TabContent(props){
   if(props.tap ===0){return <div>0번째</div>
   }else if (props.tap === 1) {
     return <div>1번째</div>
-  }else if (props.tap === 2){
-    return <div>2번째</div>
   }
 }
 ;

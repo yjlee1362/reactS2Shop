@@ -5,8 +5,10 @@ import React, { useContext, useState } from 'react';
 import dett from './data.js';
 import Detail from './Detail.js';
 import axios from 'axios';
+import Cart from './Cart.js';
 
 import { Link, Route, Switch, useHistory } from 'react-router-dom';
+
 
 let 재고context = React.createContext();
 
@@ -47,7 +49,7 @@ function App() {
     <div className="App">
       <Navbar bg="light" expand="lg">
         <Container>
-          <Navbar.Brand href="#home">PC샵</Navbar.Brand>
+          <Navbar.Brand href="#home">이쁜신발샵</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
@@ -101,10 +103,14 @@ function App() {
           <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
           
         </Route>
+        <Route path="/cart">
+          <Cart/>
+        </Route>
         {/* <Route path="/어떤경로" component={컴포넌트이름}></Route> */}
         <Route path="/:id">
           <div> 구현중입니다. </div>
         </Route>
+        
       </Switch>
     </div>
 
