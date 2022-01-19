@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import { Nav } from 'react-bootstrap';
-
+import { connect } from "react-redux";
 
 import {CSSTransition} from "react-transition-group"
 import './Detail.scss';
@@ -65,7 +65,8 @@ function Detail(props) {
           <Info 재고={props.재고} />
           <버튼들>
             <button className="btn btn-danger"
-              onClick={() => { props.재고변경([9, 11, 12]) }}>주문하기</button>
+              onClick={() => { props.재고변경([9, 11, 12])
+              props.dispatch({type:'항목추가',payload :{id:clikedId.id, name:clikedId.title,quan:1}}) }}>주문하기</button>
             <button className="btn btn-danger" onClick={() => { history.goBack(); }}>이전페이지</button>
           </버튼들>
         </div>
@@ -113,4 +114,15 @@ function Info(props) {
   )
 }
 
-export default Detail;
+function state를props화(state){
+  return {
+    state : state.reducer,
+    alertState : state.reducer2
+  }
+}
+
+export default connect(state를props화)(Detail);
+
+
+
+

@@ -55,6 +55,7 @@ function App() {
             <Nav className="me-auto">
               <Nav.Link as={Link} to="/">Home</Nav.Link>
               <Nav.Link as={Link} to="/detail">Detail</Nav.Link>
+              <Nav.Link as={Link} to="/cart">Cart</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
@@ -93,15 +94,12 @@ function App() {
                   .catch(() => {
                     console.log('miss')
                   })
-              }} >더보기</Button>{' '}
-              
+              }} >더보기</Button>{' '}              
             </div>
           </div>
         </Route>
-        <Route path="/detail/:id">
-        
-          <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />
-          
+        <Route path="/detail/:id">        
+          <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />          
         </Route>
         <Route path="/cart">
           <Cart/>

@@ -32,6 +32,12 @@ function Cart(props) {
                         
                 </tbody>
             </Table>
+            { props.alertState ===true
+            ?            (<div className="my-alret2">
+                <p>지금 구매하시면 할인들어갑니다</p>
+                <button onClick={()=>{props.dispatch({type:'닫기'})}}>닫기</button>
+            </div>)
+            : null} 
 
 
         </div>
@@ -53,7 +59,8 @@ function 표내용 (props){
 
 function state를props화(state){
   return {
-    state : state
+    state : state.reducer,
+    alertState : state.reducer2
   }
 }
 
