@@ -39,10 +39,13 @@ function reducer(state = 기본state, 액션) {
     let copy = [...state];
     copy[액션.데이터].quan = copy[액션.데이터].quan + 1;
     return copy
-  } else if (액션.type === '수량감소' && state[0].quan > 0) {
+  } else if (액션.type === '수량감소' ) {
     let copy = [...state];
     copy[액션.데이터].quan--;
     return copy
+  } else if (액션.type === '수량변경'){
+    let copy = [...state];
+    copy[액션.데이터.번호].quan = 액션.데이터.수량;
   }
   else {
     return state

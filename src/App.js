@@ -47,7 +47,7 @@ function App() {
   
   return (
     <div className="App">
-      <Navbar bg="light" expand="lg">
+      <Navbar bg="light" expand="lg" className='navbar'>
         <Container>
           <Navbar.Brand href="#home">이쁜신발샵</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -124,7 +124,7 @@ function 상품(props) {
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.content}</p>
       <p>{props.shoes.price}</p>
-      {재고}
+      
       <Button variant="primary" onClick={() => { a.push(`/detail/${props.shoes.id}`) }} >자세히보기</Button>{' '}
     </div>
 
@@ -134,15 +134,18 @@ function 상품(props) {
 function 대문(props){
   return(
     <div className='jumbotron'>
-            안녕친구들 <br />
+            <span>안녕친구들 <br />
             여기는 신발을 파는 곳이야<br />
             아쉽게도 아직은 못팔아<br />
             언젠가는 팔 수 있을꺼야<br />
             그때 다시 만나자구<br />
             다들 밥 잘먹고<br />
-            나중에 보자<br />            
-          <Button variant="dark" onClick={()=>{props.jumbotronChange(!props.jumbotron)}}>닫기</Button>{' '}
-            
+            나중에 보자<br/>
+            <br/>
+            <span className="btn btn-secondary" onClick={()=>{props.jumbotronChange(!props.jumbotron)}}>닫기</span></span>
+            <div>     
+          
+          </div>
           </div>
   )
 }
