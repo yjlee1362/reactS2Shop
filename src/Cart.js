@@ -30,10 +30,11 @@ function Cart(props) {
                                 <td>{stateReducer[i].quan}</td>
                                 <td><Button onClick={() => { dispatch({ type: '수량증가', 데이터:  i }) }}>+</Button>
                                     <Button onClick={() => { dispatch({ type: '수량감소', 데이터:  i }) }}>-</Button>
-                                    {/* <input onChange={(e)=>{quansChange(e.target.value)
+                                    <input onChange={(e)=>{quansChange(e.target.value)
                                 }}/>
-                                    <Button onClick={() => { dispatch({ type: '수량변경', 데이터:{번호 : i, 수량 : {quans} } }) }}>갯수변경</Button> 
-                                    수정해야함. 왜인지 안됌*/}
+                                    <Button onClick={() => { dispatch({ type: '수량변경', 데이터:{번호 : i, 수량 : quans } }) }}>갯수변경</Button> 
+                                    <Button onClick={() => { dispatch({ type: '빼기', 데이터: i }) }}>빼기</Button> 
+                                    
                                 </td>
                             </tr>
                         )

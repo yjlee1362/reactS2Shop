@@ -40,13 +40,21 @@ function reducer(state = 기본state, 액션) {
     copy[액션.데이터].quan = copy[액션.데이터].quan + 1;
     return copy
   } else if (액션.type === '수량감소' ) {
+    if(state[액션.데이터].quan === 0){return state}
+    else{
     let copy = [...state];
     copy[액션.데이터].quan--;
-    return copy
+    return copy}
   } else if (액션.type === '수량변경'){
     let copy = [...state];
     copy[액션.데이터.번호].quan = 액션.데이터.수량;
+    return copy
   }
+    else if (액션.type ==='빼기'){
+      let copy = [...state];
+      copy.splice(액션.데이터,1);
+      return copy;
+    }
   else {
     return state
   }
