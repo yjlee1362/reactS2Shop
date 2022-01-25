@@ -8,8 +8,10 @@ function Cart(props) {
     let state = useSelector((state) => { return state })
     const stateReducer = state.reducer;
     let dispatch = useDispatch();
-    let [quans,quansChange] = useState(0)
-
+    let [quans, quansChange] = useState(0)
+    let sw = localStorage.getItem('saikin');
+    sw = JSON.parse(sw);
+  
     return (
         <div>
             <Table striped bordered hover variant="dark">
@@ -28,13 +30,14 @@ function Cart(props) {
                                 <td>{stateReducer[i].id}</td>
                                 <td>{stateReducer[i].name}</td>
                                 <td>{stateReducer[i].quan}</td>
-                                <td><Button onClick={() => { dispatch({ type: '수량증가', 데이터:  i }) }}>+</Button>
-                                    <Button onClick={() => { dispatch({ type: '수량감소', 데이터:  i }) }}>-</Button>
-                                    <input onChange={(e)=>{quansChange(e.target.value)
-                                }}/>
-                                    <Button onClick={() => { dispatch({ type: '수량변경', 데이터:{번호 : i, 수량 : quans } }) }}>갯수변경</Button> 
-                                    <Button onClick={() => { dispatch({ type: '빼기', 데이터: i }) }}>빼기</Button> 
-                                    
+                                <td><Button onClick={() => { dispatch({ type: '수량증가', 데이터: i }) }}>+</Button>
+                                    <Button onClick={() => { dispatch({ type: '수량감소', 데이터: i }) }}>-</Button>
+                                    <input onChange={(e) => {
+                                        quansChange(e.target.value)
+                                    }} />
+                                    <Button onClick={() => { dispatch({ type: '수량변경', 데이터: { 번호: i, 수량: quans } }) }}>갯수변경</Button>
+                                    <Button onClick={() => { dispatch({ type: '빼기', 데이터: i }) }}>빼기</Button>
+
                                 </td>
                             </tr>
                         )
@@ -49,7 +52,6 @@ function Cart(props) {
                     <button onClick={() => { props.dispatch({ type: '닫기' }) }}>닫기</button>
                 </div>)
                 : null}
-
 
         </div>
 
@@ -67,6 +69,8 @@ function 표내용(props) {
         </tr>
     )
 }
+
+
 
 export default Cart;
 

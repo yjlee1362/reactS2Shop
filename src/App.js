@@ -1,7 +1,7 @@
 
 import { Button, Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import './App.css';
-import React, { useContext, useState, lazy, Suspense } from 'react';
+import React, { useContext, useState, lazy, Suspense, useEffect } from 'react';
 import dett from './data.js';
 
 import axios from 'axios';
@@ -17,6 +17,7 @@ let 재고context = React.createContext();
 
 function App() {
 
+  let [saikinS, saikinSC] = useState();
   let [shoes, shoes변경] = useState(dett);
   let [재고,재고변경] = useState([10,11,12]);
   let [jumbotron,jumbotronChange] = useState(true);
@@ -44,7 +45,10 @@ function App() {
     shoes변경(changedArray);
     
   };
+  let sw = localStorage.getItem('saikin');
+  sw = JSON.parse(sw);
 
+  console.log(saikinS);
   
   return (
     <div className="App">
@@ -101,11 +105,11 @@ function App() {
         </Route>
         <Route path="/detail/:id">
           <Suspense fallback={<div>로딩중</div>}        >
-          <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} />   
+          <Detail shoes={shoes} 재고={재고} 재고변경={재고변경} saikinSC={saikinSC}/>   
           </Suspense>       
         </Route>
         <Route path="/cart">
-          <Cart/>
+          <Cart shoes = {shoes}/>
         </Route>
         {/* <Route path="/어떤경로" component={컴포넌트이름}></Route> */}
         <Route path="/:id">
@@ -113,6 +117,13 @@ function App() {
         </Route>
         
       </Switch>
+      
+      <div>
+        {saikinS && saikinS.map((a)=>{return(<div>
+        {shoes[a].title}</div>)
+      })}
+      </div>
+
     </div>
 
   );

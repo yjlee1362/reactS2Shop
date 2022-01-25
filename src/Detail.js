@@ -24,24 +24,51 @@ padding : 10px`;
 
 
 function Detail(props) {
+
+  let history = useHistory();
+  let { id } = useParams();
+
+
+ 
   let [매진스위치, 매진스위치변경] = useState(false);
   let [tap,tapChange] = useState(0);
   let [스위치,스위치변경] =useState(false);
+  
 
   useEffect(() => {
     let 타이머 = setTimeout(() => { 매진스위치변경(true) }, 3000);
     return () => { clearTimeout(타이머) }
   }, [])
 
-  let history = useHistory();
-  let { id } = useParams();
+  useEffect(()=>{
+    let sw = localStorage.getItem('saikin');
+    if(sw != null){
+      sw = JSON.parse(sw);
+      sw.push(id);
+      sw = new Set(sw);
+      sw = [...sw];
+      props.saikinSC(sw);
+      localStorage.setItem('saikin', JSON.stringify(sw));
+     
+    }
+    
+    else{
+      localStorage.setItem('saikin',JSON.stringify([id]))
+      let sw = localStorage.getItem('saikin');
+      props.saikinSC(sw)
+    }
+
+
+  },[]);
+
+  
+ 
+  let [인풋, 인풋값] = useState('사장에게 보내고 싶은말을 적어보세요');
 
   let clikedId = props.shoes.find(function (product) {
     return product.id == id;
   });
-  let [인풋, 인풋값] = useState('사장에게 보내고 싶은말을 적어보세요');
 
-  
 
   return (
     <div className="container" key={clikedId.id} >
