@@ -44,13 +44,23 @@ function Detail(props) {
     let sw = localStorage.getItem('saikin');
     if(sw != null){
       sw = JSON.parse(sw);
+      if(sw.length >= 3){
+      sw.shift();
       sw.push(id);
       sw = new Set(sw);
       sw = [...sw];
       props.saikinSC(sw);
-      localStorage.setItem('saikin', JSON.stringify(sw));
+      localStorage.setItem('saikin', JSON.stringify(sw));}
+       else{
+        sw.push(id);
+        sw = new Set(sw);
+        sw = [...sw];
+        props.saikinSC(sw);
+        localStorage.setItem('saikin', JSON.stringify(sw));}
+        
+       }
      
-    }
+    
     
     else{
       localStorage.setItem('saikin',JSON.stringify([id]))

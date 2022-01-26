@@ -118,7 +118,7 @@ function App() {
         
       </Switch>
       
-      <div>
+      <div><h3>최근에 본거</h3>
         {saikinS && saikinS.map((a)=>{return(<div>
         {shoes[a].title}</div>)
       })}

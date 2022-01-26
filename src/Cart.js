@@ -9,9 +9,7 @@ function Cart(props) {
     const stateReducer = state.reducer;
     let dispatch = useDispatch();
     let [quans, quansChange] = useState(0)
-    let sw = localStorage.getItem('saikin');
-    sw = JSON.parse(sw);
-  
+    
     return (
         <div>
             <Table striped bordered hover variant="dark">
